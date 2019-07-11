@@ -48,6 +48,24 @@
    
 
    $class = new ReflectionClass('Person'); // 建立 Person这个类的反射类 
+
+   //获取$class类的构造器对象
+   $constructor = $reflection->getConstructor();
+   if ($constructor !== null) {
+      //获取构造方法参数列表$constructor->getParameters()
+      foreach ($constructor->getParameters() as $param) {
+      //构造参数是否有可利用默认值
+         if ($param->isDefaultValueAvailable()) {
+             $dependencies[] = $param->getDefaultValue();
+         } else {
+            //获取参数的类名称
+             $c = $param->getClass();
+             $dependencies[] = Instance::of($c === null ? null : $c->getName());
+         }
+      }
+   }
+   $reflection->isInstantiable();//对象是否可实例化
+
    $instance  = $class->newInstanceArgs(); // 相当于实例化Person 类
 
 //$private_properties = $class->getProperties(ReflectionProperty::IS_PRIVATE);//只想获取到private属性[IS_STATIC,IS_PUBLIC,IS_PROTECTED,IS_PRIVATE]
