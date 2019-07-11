@@ -50,7 +50,7 @@
    $class = new ReflectionClass('Person'); // 建立 Person这个类的反射类 
 
    //获取$class类的构造器对象
-   $constructor = $reflection->getConstructor();
+   $constructor = $class->getConstructor();
    if ($constructor !== null) {
       //获取构造方法参数列表$constructor->getParameters()
       foreach ($constructor->getParameters() as $param) {
@@ -64,7 +64,7 @@
          }
       }
    }
-   $reflection->isInstantiable();//对象是否可实例化
+   $class->isInstantiable();//对象是否可实例化
 
    $instance  = $class->newInstanceArgs(); // 相当于实例化Person 类
 
