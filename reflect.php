@@ -48,12 +48,12 @@
    
 
    $class = new ReflectionClass('Person'); // 建立 Person这个类的反射类 
-   $instance  = $class->newInstanceArgs($args); // 相当于实例化Person 类
+   $instance  = $class->newInstanceArgs(); // 相当于实例化Person 类
 
 //$private_properties = $class->getProperties(ReflectionProperty::IS_PRIVATE);//只想获取到private属性[IS_STATIC,IS_PUBLIC,IS_PROTECTED,IS_PRIVATE]
    $properties = $class->getProperties();
    foreach ($properties as $property) {
-       echo $property->getName() . "\n";
+       echo $property->getName() . "</br>";
    }
    
 //获取类的方法
@@ -79,10 +79,10 @@ getMethod(string)  获取方法
 反调用类的方法
 */
 // 执行detail方法
-$method = new ReflectionMethod('Person', 'test');
+$method = new ReflectionMethod('Person', 'setBiography');
     
 if ($method->isPublic() && !$method->isStatic()) {
-    echo 'Action is right';
+    echo 'Action is right'."</br>";
 }
-echo $method->getNumberOfParameters(); // 参数个数
-echo $method->getParameters(); // 参数对象数组
+echo $method->getNumberOfParameters()."</br>"; // 参数个数
+print_r($method->getParameters()); // 参数对象数组
